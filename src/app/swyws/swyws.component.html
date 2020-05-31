@@ -1,0 +1,6 @@
+<div class="swyws-hi">
+	<p class="swyws-hi__message">Hi! I'm SWYWS and this is the list of my projects:</p>
+	<ul class="swyws-hi__list hi-list">
+		<li *ngFor="let project of mainDataService.devs[0].projects" class="hi-list__item"><a routerLink="{{project}}" class="hi-list__link">{{project}}</a></li>
+	</ul>
+</div>

@@ -1,0 +1,33 @@
+<div class="header">
+	<div class="logo">
+		Game Market
+	</div>
+	<div class="nav">
+
+		<ol class="nav__list nav-list">
+
+			<li class="nav-list__item">
+				<a routerLink="home" class="nav-list__link">Home</a>
+			</li>
+
+			<li class="nav-list__item" (mouseenter)="showDevs()" (mouseleave)="showDevs()">
+				<a class="nav-list__link">Developers</a>
+				<ul [ngClass]="{devsHidden: hiddenDevs, devs: true}">
+					<li class="devs__item"><a routerLink="swyws" class="devs__link">{{mainDataService.devs[0].name}}</a></li>
+					<li class="devs__item"><a class="devs__link">{{mainDataService.devs[1].name}}</a></li>
+					<li class="devs__item"><a class="devs__link">{{mainDataService.devs[2].name}}</a></li>
+				</ul>
+			</li>
+
+			<li class="nav-list__item">
+				<a class="nav-list__link">About Us</a>
+			</li>
+
+			<li class="nav-list__item">
+				<a class="nav-list__link">Contacts</a>
+			</li>
+
+		</ol>
+
+	</div>
+</div>

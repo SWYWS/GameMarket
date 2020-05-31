@@ -1,0 +1,14 @@
+.game-container {
+	position: relative;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+
+.xo-settings {
+	height: 150px;
+}
+
+.xo-game {
+	margin-top: 20px;
+	height: 400px;
+}

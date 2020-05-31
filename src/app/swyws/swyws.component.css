@@ -1,0 +1,19 @@
+.swyws-hi {
+	margin-top: 20px;
+	margin-left: 20px;
+	color: white;
+}
+
+.swyws-hi__list {
+	list-style-type: none;
+}
+
+.hi-list__link {
+	color: rgb(128, 128, 128);
+	text-decoration: none;
+	transition: 0.3s;
+}
+
+.hi-list__link:hover {
+	color: white;
+}

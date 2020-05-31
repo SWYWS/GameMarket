@@ -1,0 +1,23 @@
+<div class="menu">
+
+	<ol class="menu__list menu-list">
+
+		<li *ngFor="let dev of mainDataService.devs" class="menu-list__item">
+
+			<a class="developer" (click)="toggleGameLists(dev.id)">{{dev.name}}</a>
+
+			<ol [ngClass]="{games: true, hideGames: hiddenList[dev.id]}">
+
+				<li *ngFor="let project of dev.projects" class="games__item">
+					<a routerLink="{{dev.name}}/{{project}}" class="games__link">{{project}}</a>
+				</li>
+
+			</ol>
+
+		</li>
+
+	</ol>
+
+	<a *ngIf="listOpened" class="menu__button" (click)="hideAllGames()">Hide game lists</a>
+
+</div>

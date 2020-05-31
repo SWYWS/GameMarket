@@ -1,0 +1,3 @@
+<div class="game">
+  <div *ngFor="let item of dataService.gameModel; index as i" class="game__cell" (click)="makeMove(i)">{{item | filterString}}</div>
+</div>
