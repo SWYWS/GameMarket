@@ -14,6 +14,10 @@ export class SwywsXoGameComponent implements OnInit {
     this.dataService.makeMove(index);
   }
 
+  showSettingsComp(): void {
+    this.dataService.toggleSettingsComponentVisibility();
+  }
+
   ngOnInit() {
   }
 

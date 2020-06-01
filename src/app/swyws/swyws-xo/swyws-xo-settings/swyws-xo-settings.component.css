@@ -1,6 +1,10 @@
-.settings {
+.settings-container {
   color: grey;
   margin-left: 280px;
+}
+
+.hidden {
+  display: none;
 }
 
 .settings input[type="radio"] {

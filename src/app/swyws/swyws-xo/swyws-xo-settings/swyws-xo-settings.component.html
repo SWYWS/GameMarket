@@ -1,13 +1,21 @@
-<div class="settings">
+<div class="settings-container">
 
-	<input type="radio" name="players" id="X" checked><label for="X" (click)="changeSide(sideX, sideO)">play as <span class="xo-symbol">{{sideX}}</span></label>
-	<input type="radio" name="players" id="O"><label for="O" (click)="changeSide(sideO, sideX)">play as <span class="xo-symbol">{{sideO}}</span></label><br>
+	<div [ngClass]="{settings: true, hidden: !dataService.showSettingsComp}">
 
-	<div class="diff">
-		<input type="radio" name="difficulty" id="easy" checked><label for="easy" (click)="changeDifficulty(diffEasy)">{{diffEasy}}</label>
-		<input type="radio" name="difficulty" id="hard"><label for="hard" (click)="changeDifficulty(diffHard)">{{diffHard}}</label><br>
+		<input type="radio" name="players" id="X" checked><label for="X" (click)="changeSide(sideX, sideO)">play as <span
+				class="xo-symbol">{{sideX}}</span></label>
+		<input type="radio" name="players" id="O"><label for="O" (click)="changeSide(sideO, sideX)">play as <span
+				class="xo-symbol">{{sideO}}</span></label><br>
+
+		<div class="diff">
+			<input type="radio" name="difficulty" id="easy" checked><label for="easy"
+				(click)="changeDifficulty(diffEasy)">{{diffEasy}}</label>
+			<input type="radio" name="difficulty" id="hard"><label for="hard"
+				(click)="changeDifficulty(diffHard)">{{diffHard}}</label><br>
+		</div>
+
+		<a class="new-game-button" id="startGame" (click)="startGame()">start game</a>
+		
 	</div>
-
-	<a class="new-game-button" id="startGame" (click)="startGame()">start game</a>
 
 </div>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SwywsXoDataService } from "./swyws-xo-data.service";
 
 @Component({
   selector: 'app-swyws-xo',
@@ -8,7 +7,7 @@ import { SwywsXoDataService } from "./swyws-xo-data.service";
 })
 export class SwywsXoComponent implements OnInit {
 
-  constructor(private dataService: SwywsXoDataService) { }
+  constructor() { }
 
   ngOnInit() {
   }

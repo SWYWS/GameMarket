@@ -6,12 +6,11 @@ import { XoSettings } from "./xo-settings";
 })
 export class SwywsXoDataService {
 
+  showSettingsComp: boolean = true;
   settings: XoSettings;
   gameModel: Array<number | string>;
-  huWon: boolean = true;
-  aiWon: boolean = false;
-  draw: boolean = false;
   aiMove: Function;
+  result: string = "";
 
   constructor() { }
 
@@ -19,18 +18,20 @@ export class SwywsXoDataService {
     this.settings = settings;
     this.aiMove = this.selectAiMove(this.settings.difficulty);
     this.gameModel = this.createModel();
-    this.huWon = false;
-    this.aiWon = false;
-    this.draw = false;
+    this.result = "";
 
     if (this.settings.huPlayer == "O") {
       let id: number = this.aiMove(this.gameModel).index;
-      this.setGameCellValue(id, this.settings.aiPlayer);
+      this.gameModel[id] = this.settings.aiPlayer;
     }
   }
 
+  toggleSettingsComponentVisibility(): void {
+    this.showSettingsComp = !this.showSettingsComp;
+  }
+
   createModel(): Array<number | string> {
-    let gameModel = [];
+    let gameModel: Array<number | string> = [];
     for (let i = 0; i < this.settings.height * this.settings.width; i++) {
       gameModel[i] = i;
     }
@@ -38,26 +39,26 @@ export class SwywsXoDataService {
   }
 
   makeMove(index: number): void {
-    if (typeof this.gameModel[index] == "string" || this.huWon || this.aiWon || this.draw) return;
+    if (typeof this.gameModel[index] == "string" || this.result) return;
 
-    this.setGameCellValue(index, this.settings.huPlayer);
+    this.gameModel[index] = this.settings.huPlayer;
 
     if (this.xoWin_3x3(this.gameModel, this.settings.huPlayer)) {
-      this.huWon = true;
+      this.result = "win";
       return;
     } else if (this.getEmptyIds(this.gameModel).length == 0) {
-      this.draw = true;
+      this.result = "draw";
       return;
     }
 
     let id: number = this.aiMove(this.gameModel).index;
-    this.setGameCellValue(id, this.settings.aiPlayer);
+    this.gameModel[id] = this.settings.aiPlayer;
 
     if (this.xoWin_3x3(this.gameModel, this.settings.aiPlayer)) {
-      this.aiWon = true;
+      this.result = "loss";
       return;
     } else if (this.getEmptyIds(this.gameModel).length == 0) {
-      this.draw = true;
+      this.result = "draw";
       return;
     }
   }
@@ -68,12 +69,8 @@ export class SwywsXoDataService {
         return this.minimax;
       default:
       case "easy":
-        return this.getRandomId;
+        return this.aiRandomMove;
     }
-  }
-
-  setGameCellValue(index: number, val: string): void {
-    this.gameModel[index] = val;
   }
 
   xoWin_3x3(model: Array<number | string>, player: string): boolean {
@@ -94,13 +91,13 @@ export class SwywsXoDataService {
     return model.filter(item => typeof item == "number");
   }
 
-  getRandomId(model: Array<number | string>) {
-    let availIds = this.getEmptyIds(model);
+  aiRandomMove(model: Array<number | string>) {
+    let availIds: Array<number | string> = this.getEmptyIds(model);
     return { index: +availIds[Math.floor(Math.random() * (availIds.length))] };
   }
 
   minimax(model: Array<number | string>, player: string = this.settings.aiPlayer) {
-    let availIds = this.getEmptyIds(model);
+    let availIds: Array<number | string> = this.getEmptyIds(model);
 
     if (this.xoWin_3x3(model, this.settings.huPlayer)) {
       return { score: -10 };
@@ -110,9 +107,9 @@ export class SwywsXoDataService {
       return { score: 0 };
     }
 
-    let moves = new Array;
+    let moves: Array<MoveInfo> = new Array;
     for (let i = 0; i < availIds.length; i++) {
-      let move = new MoveInfo;
+      let move: MoveInfo = new MoveInfo;
       move.index = model[availIds[i]];
       model[availIds[i]] = player;
 
@@ -128,9 +125,9 @@ export class SwywsXoDataService {
       moves.push(move);
     }
 
-    let bestMove;
+    let bestMove: number;
     if (player === this.settings.aiPlayer) {
-      let bestScore = -99999;
+      let bestScore: number = -99999;
       for (let i = 0; i < moves.length; i++) {
         if (moves[i].score > bestScore) {
           bestScore = moves[i].score;
@@ -138,7 +135,7 @@ export class SwywsXoDataService {
         }
       }
     } else {
-      let bestScore = 99999;
+      let bestScore: number = 99999;
       for (let i = 0; i < moves.length; i++) {
         if (moves[i].score < bestScore) {
           bestScore = moves[i].score;

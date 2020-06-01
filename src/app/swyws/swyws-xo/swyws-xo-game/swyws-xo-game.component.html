@@ -1,3 +1,17 @@
-<div class="game">
-  <div *ngFor="let item of dataService.gameModel; index as i" class="game__cell" (click)="makeMove(i)">{{item | filterString}}</div>
+<div class="game-result-container">
+
+  <div class="game">
+    <div *ngFor="let item of dataService.gameModel; index as i" class="game__cell" (click)="makeMove(i)">
+      {{item | filterString}}</div>
+  </div>
+
+  <div [ngClass]="
+    {resultWin: dataService.result=='win', 
+    resultLoss: dataService.result=='loss', 
+    resultDraw: dataService.result=='draw',
+    resultNone: dataService.result=='',
+    result: true}">
+    <p><a class="settings-link" (click)="showSettingsComp()">go to settings</a></p>
+  </div>
+
 </div>
