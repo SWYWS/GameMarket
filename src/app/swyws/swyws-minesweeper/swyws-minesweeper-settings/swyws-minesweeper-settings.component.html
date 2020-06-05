@@ -1,1 +1,40 @@
-<p>swyws-minesweeper-settings works!</p>
+<div class="ms-settings-container">
+
+  <p class="select-diff">select difficulty:</p>
+
+  <div>
+    <div class="ms-settings">
+      <div><input type="radio" name="diff" id="ms-diff-easy" checked><label class="diff__label" for="ms-diff-easy"
+          (click)="test()">easy</label></div>
+
+      <div><input type="radio" name="diff" id="ms-diff-medium"><label class="diff__label" for="ms-diff-medium"
+          (click)="test()">medium</label></div>
+
+      <div><input type="radio" name="diff" id="ms-diff-hard"><label class="diff__label" for="ms-diff-hard"
+          (click)="test()">hard</label>
+      </div>
+
+      <div><input type="radio" name="diff" id="ms-diff-custom"><label class="diff__label" for="ms-diff-custom"
+          (click)="toggleFormForCustomSettings()">custom</label>
+        <form *ngIf="showFormForCustomSettings">
+          <div class="group">
+            <input type="text" placeholder="width" required>
+            <span class="bar"></span>
+          </div>
+          <div class="group">
+            <input type="text" placeholder="height" required>
+            <span class="bar"></span>
+          </div>
+          <div class="group">
+            <input type="text" placeholder="bombs" required>
+            <span class="bar"></span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="start-game"><a class="start-game__button" (click)="startGame()">start game</a></div>
+
+  </div>
+
+</div>
