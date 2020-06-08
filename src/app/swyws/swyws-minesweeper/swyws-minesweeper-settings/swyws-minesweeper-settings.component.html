@@ -5,31 +5,37 @@
   <div>
     <div class="ms-settings">
       <div><input type="radio" name="diff" id="ms-diff-easy" checked><label class="diff__label" for="ms-diff-easy"
-          (click)="test()">easy</label></div>
+          (click)="setStandardSettings(9, 9, 10)">easy</label></div>
 
       <div><input type="radio" name="diff" id="ms-diff-medium"><label class="diff__label" for="ms-diff-medium"
-          (click)="test()">medium</label></div>
+          (click)="setStandardSettings(16, 16, 40)">medium</label></div>
 
       <div><input type="radio" name="diff" id="ms-diff-hard"><label class="diff__label" for="ms-diff-hard"
-          (click)="test()">hard</label>
+          (click)="setStandardSettings(30, 16, 99)">hard</label>
       </div>
 
       <div><input type="radio" name="diff" id="ms-diff-custom"><label class="diff__label" for="ms-diff-custom"
           (click)="toggleFormForCustomSettings()">custom</label>
+
         <form *ngIf="showFormForCustomSettings">
+
           <div class="group">
-            <input type="text" placeholder="width" required>
+            <input type="text" placeholder="width" [(ngModel)]="settings.width" [ngModelOptions]="{standalone: true}">
             <span class="bar"></span>
           </div>
+
           <div class="group">
-            <input type="text" placeholder="height" required>
+            <input type="text" placeholder="height" [(ngModel)]="settings.height" [ngModelOptions]="{standalone: true}">
             <span class="bar"></span>
           </div>
+          
           <div class="group">
-            <input type="text" placeholder="bombs" required>
+            <input type="text" placeholder="bombs" [(ngModel)]="settings.bombs" [ngModelOptions]="{standalone: true}">
             <span class="bar"></span>
           </div>
+
         </form>
+
       </div>
     </div>
 

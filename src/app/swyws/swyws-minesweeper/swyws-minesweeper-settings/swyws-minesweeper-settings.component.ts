@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MsSettings } from "../ms-settings";
+import { SwywsMinesweeperDataService } from "../swyws-minesweeper-data.service"
 
 @Component({
   selector: 'app-swyws-minesweeper-settings',
@@ -7,19 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SwywsMinesweeperSettingsComponent implements OnInit {
 
+  settings: MsSettings;
   showFormForCustomSettings: boolean = false;
-  
-  constructor() { }
+
+  constructor(private dataService: SwywsMinesweeperDataService) { }
 
   toggleFormForCustomSettings(): void {
     this.showFormForCustomSettings = true;
+    this.settings.width = undefined;
+    this.settings.height = undefined;
+    this.settings.bombs = undefined;
   }
 
-  test(): void {
+  setStandardSettings(width: number, height: number, bombs: number): void {
     this.showFormForCustomSettings = false;
+    this.settings.width = width;
+    this.settings.height = height;
+    this.settings.bombs = bombs;
+  }
+
+  startGame(): void {
+    this.dataService.dataInit(this.settings);
   }
 
   ngOnInit() {
+    this.settings = new MsSettings;
   }
 
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule }   from '@angular/forms';
 
 import { SwywsMinesweeperRoutingModule } from './swyws-minesweeper-routing.module';
 import { SwywsMinesweeperComponent } from './swyws-minesweeper.component';
@@ -11,7 +12,8 @@ import { SwywsMinesweeperGameComponent } from './swyws-minesweeper-game/swyws-mi
   declarations: [SwywsMinesweeperComponent, SwywsMinesweeperSettingsComponent, SwywsMinesweeperGameComponent],
   imports: [
     CommonModule,
-    SwywsMinesweeperRoutingModule
+    SwywsMinesweeperRoutingModule,
+    FormsModule
   ]
 })
 export class SwywsMinesweeperModule { }
