@@ -14,7 +14,7 @@
 				<a class="nav-list__link">Developers</a>
 				<ul [ngClass]="{devsHidden: hiddenDevs, devs: true}">
 					<li class="devs__item"><a routerLink="swyws" class="devs__link">{{mainDataService.devs[0].name}}</a></li>
-					<li class="devs__item"><a class="devs__link">{{mainDataService.devs[1].name}}</a></li>
+					<li class="devs__item"><a routerLink="nick" class="devs__link">{{mainDataService.devs[1].name}}</a></li>
 					<li class="devs__item"><a class="devs__link">{{mainDataService.devs[2].name}}</a></li>
 				</ul>
 			</li>
