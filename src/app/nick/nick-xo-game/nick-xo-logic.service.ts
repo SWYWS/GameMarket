@@ -11,6 +11,7 @@ export class NickXoLogicService {
   endMessage: string = "";
 
   choiceSideButtonVisible: boolean = false;
+  canvasVisible: boolean = true;
   fieldVisible: boolean = true;
   newGameButtonVisible: boolean = true;
 
@@ -21,6 +22,7 @@ export class NickXoLogicService {
     this.createGameModel();
     this.choiceSideButtonVisible = !this.choiceSideButtonVisible;
     this.fieldVisible = !this.fieldVisible;
+    //this.canvasVisible = !this.canvasVisible;
     if (this.xoSettings.botSide == "X") this.moveBot();
   }
 
@@ -96,6 +98,7 @@ export class NickXoLogicService {
     this.fieldVisible = !this.fieldVisible;
     this.newGameButtonVisible = !this.newGameButtonVisible;
     this.choiceSideButtonVisible = !this.choiceSideButtonVisible;
+  //  this.canvasVisible = !this.canvasVisible;
     this.endMessage = "";
     this.createGameModel();
   }
