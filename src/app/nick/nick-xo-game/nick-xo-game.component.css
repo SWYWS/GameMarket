@@ -1,0 +1,11 @@
+.background {
+    background: url("../../../assets/nick/xo-game/images/background.jpg") no-repeat;
+    
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    background-color:black;
+    color: whitesmoke;
+    overflow: hidden;
+    z-index: 0;
+}

@@ -1,0 +1,6 @@
+<div class="fieldOnBtns">
+    <div *ngIf="service.hideButtons">
+        <input type="button" class="xo-button" id="buttonX" value="Game for X" (click)="choice('X','O')">
+        <input type="button" class="xo-button" id="buttonO" value="Game for O" (click)="choice('O','X')">
+    </div>
+</div>

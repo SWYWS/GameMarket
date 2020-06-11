@@ -1,0 +1,9 @@
+<div class="result">{{xoLogicsService.endMessage}}</div>
+<div [ngClass]="{xoField:true,invisible: xoLogicsService.fieldVisible}" (click)="playGame($event)">
+    <div  *ngFor ="let item of xoLogicsService.gameModel;let i = index">
+        <div class="xo-cell" *ngFor ="let cell of item;let j = index" id="{{i}}_{{j}}"> {{cell}}</div>   
+    </div>
+</div>
+<div [ngClass]="{invisible: xoLogicsService.newGameButtonVisible}">
+    <input class="xoNewGame" type="button" value="Начать новую игру" (click)="xoLogicsService.startNewGame()">
+</div>
