@@ -1,0 +1,20 @@
+.xo-button{
+    height: 70px;
+    width: 200px;
+    font-size: 30px;
+    font-family: lucida console, serif;
+    font-weight:bold;
+    border-radius: 8px;
+    background-color: rgb(0, 174, 255);
+    cursor: pointer;
+    text-shadow: 5px 5px 1px gray;
+}
+.xo-button:hover{
+    background-color: red;
+    color: white;
+}
+.fieldOnBtns{
+    width: 420px;
+    height: 80px;
+    margin-left: 240px;
+}
