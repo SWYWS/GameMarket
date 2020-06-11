@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) }, 
   { path: 'swyws', loadChildren: () => import('./swyws/swyws.module').then(m => m.SwywsModule) }, 
   { path: 'nick', loadChildren: () => import('./nick/nick.module').then(m => m.NickModule) },
+  { path: 'khan', loadChildren: () => import('./khan/khan.module').then(m => m.KhanModule) },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

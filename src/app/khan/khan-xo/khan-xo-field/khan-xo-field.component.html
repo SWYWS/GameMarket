@@ -1,0 +1,11 @@
+<div class="over">
+    <div class="result" *ngIf="service.showResult">{{service.result}}
+        <input type="button" class="newGame" value="New Game" (click)="service.newGame()">
+    </div>
+    <table class="field" (click)="clickOnTable($event)" *ngIf="service.showTable">
+        <tr *ngFor="let item of service.array; let i = index">
+            <td *ngFor="let cell of item; let j = index" class="xo" id="{{i}}_{{j}}">{{cell}}</td>
+        </tr>
+    </table>
+</div>
+
