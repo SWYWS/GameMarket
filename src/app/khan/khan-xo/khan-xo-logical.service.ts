@@ -44,7 +44,7 @@ export class KhanXoLogicalService {
 
     if (this.draw()) {
       this.showResult = true;
-      this.result = "draw";
+      this.result = "It is draw";
       return;
     }
 
