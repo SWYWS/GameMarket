@@ -1,0 +1,9 @@
+<div class="ms-game-container">
+  <div class="ms-game">
+    <div *ngFor="let row of dataService.gameModel; index as i" class="ms-row">
+      <div *ngFor="let cell of row; index as j" class="ms-cell {{cell.className}}" (click)="makeMove(i, j)"
+        (contextmenu)="placeFlag(i, j)" (dblclick)="makeMoveDblclick(i, j)"></div>
+    </div>
+  </div>
+  <div class="result"><a class="settings-link" (click)="showSettingsComp()">go to settings</a></div>
+</div>
