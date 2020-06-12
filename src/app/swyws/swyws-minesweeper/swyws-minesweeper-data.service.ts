@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { MsSettings } from "./ms-settings"
+import { MsSettings } from "./ms-settings";
+import { MsGameCell } from "./ms-game-cell";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,9 @@ export class SwywsMinesweeperDataService {
   settings: MsSettings;
   gameModel: MsGameCell[][] = [];
   modelFilled: boolean;
+  flags: number;
+  cellsRemain: number;
+  game_over: number; //0 - game on, 1 - lost, 2 - won
 
   constructor() { }
 
@@ -20,6 +24,9 @@ export class SwywsMinesweeperDataService {
     this.settings = settings;
     this.gameModel = this.createModel();
     this.modelFilled = false;
+    this.flags = this.settings.bombs;
+    this.cellsRemain = this.settings.height * this.settings.width;
+    this.game_over = 0;
   }
 
   createModel(): MsGameCell[][] {
@@ -41,11 +48,14 @@ export class SwywsMinesweeperDataService {
 
     let target = this.gameModel[y][x];
 
-    if (target.getValue == "bomb") {
+    if (target.getValue == "bomb" && !target.flagged) {
       target.bombed();
+      this.gameOverLoss();
     }
 
-    target.openCell();
+    if (this.game_over) return;
+
+    this.cellsRemain = target.openCell(this.cellsRemain);
     if (!target.getValue) {
       let closestCells = this.getClosestCells(y, x);
       for (let cell of closestCells) {
@@ -54,11 +64,38 @@ export class SwywsMinesweeperDataService {
         this.makeMove(+coords[0], +coords[1]);
       }
     }
+
+    this.gameOverWin();
   }
 
   placeFlag(y: number, x: number): void {
+    if (!this.modelFilled || this.game_over) return;
+    
     let target = this.gameModel[y][x];
-    target.flagCell();
+    this.flags = target.flagCell(this.flags);
+  }
+
+  openClosestCells(y: number, x: number): void {
+    if (this.game_over) return;
+
+    let currentCell: MsGameCell = this.gameModel[y][x];
+    let closestCells: MsGameCell[] = this.getClosestCells(y, x);
+    let count = 0;
+
+    for (let cell of closestCells) {
+      if (cell.flagged) count++;
+    }
+
+    if (count < currentCell.getValue) return;
+
+    for (let cell of closestCells) {
+      let cellId = cell.id.split("_");
+      this.makeMove(+cellId[0], +cellId[1]);
+    }
+
+    if (count > currentCell.getValue) {
+      this.gameOverLoss();
+    }
   }
 
   fillGameModel(y: number, x: number): void {
@@ -97,29 +134,6 @@ export class SwywsMinesweeperDataService {
     this.modelFilled = true;
   }
 
-  openClosestCells(y: number, x: number): void {
-    //if (this.game_over) return;
-    
-    let currentCell: MsGameCell = this.gameModel[y][x];
-    let closestCells: MsGameCell[] = this.getClosestCells(y, x);
-    let count = 0;
-
-    for (let cell of closestCells) {
-      if (cell.flagged) count++;
-    }
-
-    if (count < currentCell.getValue) return;
-
-    for (let cell of closestCells) {
-      let cellId = cell.id.split("_");
-      this.makeMove(+cellId[0], +cellId[1]);
-    }
-
-    if (count > currentCell.getValue) {
-      //this.gameOver();
-    }
-  }
-
   getClosestCells(y: number, x: number): MsGameCell[] {
     let closestCells: MsGameCell[] = [];
 
@@ -137,54 +151,29 @@ export class SwywsMinesweeperDataService {
     }
     return closestCells;
   }
-}
 
-
-export class MsGameCell {
-  private value: number | string;
-  className: string;
-  opened: boolean;
-  flagged: boolean;
-  id: string;
-
-  constructor(id: string) {
-    this.setValue = 0;
-    this.className = "ms-cell-closed";
-    this.opened = false;
-    this.flagged = false;
-    this.id = id;
-  }
-
-  get getValue(): number | string {
-    return this.value;
-  }
-
-  set setValue(value: number | string) {
-    this.value = value;
-  }
-
-  openCell(): void {
-    if (this.opened || this.flagged) return;
-
-    this.className = "ms-cell-" + this.value;
-    this.opened = true;
-  }
-
-  flagCell(): void {
-    if (this.opened) return;
-
-    if (!this.flagged) {
-      this.className = "ms-cell-flagged";
-      this.flagged = true;
-    } else if (this.flagged) {
-      this.className = "ms-cell-closed";
-      this.flagged = false;
+  gameOverLoss(): void {
+    for (let row of this.gameModel) {
+      for (let cell of row) {
+        if (cell.getValue == "bomb") {
+          this.cellsRemain = cell.openCell(this.cellsRemain);
+        }
+        if (!cell.flaggedCorrectly()) {
+          cell.noBomb();
+        }
+      }
     }
+    this.game_over = 1;
   }
 
-  bombed(): void {
-    if (this.flagged) return;
-
-    this.className = "ms-cell-bombed";
+  gameOverWin(): void {
+    if (this.cellsRemain != this.settings.bombs) return;
+    
+    for (let row of this.gameModel) {
+      for (let cell of row) {
+        if (!cell.flagged) this.flags = cell.flagCell(this.flags);
+      }
+    }
+    this.game_over = 2;
   }
 }

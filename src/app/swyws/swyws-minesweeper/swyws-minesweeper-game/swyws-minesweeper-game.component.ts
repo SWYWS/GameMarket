@@ -25,6 +25,10 @@ export class SwywsMinesweeperGameComponent implements OnInit {
     return false;
   }
 
+  showSettingsComp(): void {
+
+  }
+
   ngOnInit() {
   }
 
