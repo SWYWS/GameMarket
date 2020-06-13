@@ -1,0 +1,4 @@
+<div [ngClass]="{menu:true,invisible: xoLogicsService.choiceSideButtonVisible}">
+    <input type="button" class="xo-button"  value="Играть за X" (click)="choiceSide('X','O')">
+    <input type="button" class="xo-button"  value="Играть за O" (click)="choiceSide('O','X')">
+  </div>
