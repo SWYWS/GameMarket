@@ -13,7 +13,7 @@ export class NickXoGameCanvasComponent implements OnInit {
   @ViewChild("q", { static: true })
   canvas: ElementRef<HTMLCanvasElement>;
   ctx: CanvasRenderingContext2D;
-  ssdads:boolean;
+ 
 
   random(items: any): any {
     return items[Math.floor(Math.random() * items.length)];
