@@ -12,9 +12,18 @@ export class SwywsMinesweeperDataService {
   modelFilled: boolean;
   flags: number;
   cellsRemain: number;
-  game_over: number; //0 - game on, 1 - lost, 2 - won
+  game_over: number = 0; //0 - game on, 1 - lost, 2 - won
+  showSettingsComp: boolean = true;
 
   constructor() { }
+
+  showSettings(): void {
+    this.showSettingsComp = true;
+  }
+
+  hideSettingsComp(): void {
+    this.showSettingsComp = false;
+  }
 
   getModel(): MsGameCell[][] {
     return this.gameModel;
@@ -79,6 +88,9 @@ export class SwywsMinesweeperDataService {
     if (this.game_over) return;
 
     let currentCell: MsGameCell = this.gameModel[y][x];
+
+    if (currentCell.flagged) return;
+
     let closestCells: MsGameCell[] = this.getClosestCells(y, x);
     let count = 0;
 

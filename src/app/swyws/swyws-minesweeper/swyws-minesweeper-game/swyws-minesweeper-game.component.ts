@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SwywsMinesweeperDataService } from "../swyws-minesweeper-data.service"
+import { SwywsMinesweeperDataService } from "../swyws-minesweeper-data.service";
 
 @Component({
   selector: 'app-swyws-minesweeper-game',
@@ -26,7 +26,7 @@ export class SwywsMinesweeperGameComponent implements OnInit {
   }
 
   showSettingsComp(): void {
-
+    this.dataService.showSettings();
   }
 
   ngOnInit() {

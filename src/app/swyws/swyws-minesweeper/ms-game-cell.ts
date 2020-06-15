@@ -32,7 +32,7 @@ export class MsGameCell {
   flagCell(flags: number): number {
     if (this.opened) return flags;
 
-    if (!this.flagged) {
+    if (!this.flagged && flags > 0) {
       this.className = "ms-cell-flagged";
       this.flagged = true;
       return --flags;

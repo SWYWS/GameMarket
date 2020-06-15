@@ -29,6 +29,7 @@ export class SwywsMinesweeperSettingsComponent implements OnInit {
   }
 
   startGame(): void {
+    this.dataService.hideSettingsComp();
     this.dataService.dataInit(this.settings);
   }
 

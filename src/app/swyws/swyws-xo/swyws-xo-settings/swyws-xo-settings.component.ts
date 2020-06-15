@@ -28,7 +28,7 @@ export class SwywsXoSettingsComponent implements OnInit {
 
   startGame(): void {
     this.dataService.dataInit(this.settings);
-    this.dataService.toggleSettingsComponentVisibility();
+    this.dataService.hideSettingsComponent();
   }
 
   ngOnInit() {

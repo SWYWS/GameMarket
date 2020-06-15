@@ -26,8 +26,12 @@ export class SwywsXoDataService {
     }
   }
 
-  toggleSettingsComponentVisibility(): void {
-    this.showSettingsComp = !this.showSettingsComp;
+  showSettingsComponent(): void {
+    this.showSettingsComp = true;
+  }
+
+  hideSettingsComponent(): void {
+    this.showSettingsComp = false;
   }
 
   createModel(): Array<number | string> {
